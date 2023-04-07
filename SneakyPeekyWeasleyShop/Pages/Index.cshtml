@@ -12,14 +12,13 @@
 <div class="card-columns">
     @foreach (var magicProduct in Model.MagicProducts)
     {
-        <div class="card">
-            <div class="card-img" style="background-image:url('@magicProduct.Image')"> </div>
-            <div class="card-body">
-                <h5 class="card-title">@magicProduct.Name</h5>
-                <h5 class="card-title">@magicProduct.Description</h5>
-            </div>
+    <div class="card">
+        <div class="card-img" style="background-image:url('@magicProduct.Image')"> </div>
+        <div class="card-body">
+            <h5 class="card-title">@magicProduct.Name</h5>
+            <h5 class="card-title">@magicProduct.Description</h5>
         </div>
-        
+    </div>
     }
 </div>
 
