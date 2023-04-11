@@ -1,10 +1,13 @@
+using SneakyPeekyWeasleyShop.Models;
 using SneakyPeekyWeasleyShop.Services;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<JsonFileMagicProductService>();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -24,5 +27,12 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllers();
+/*app.MapGet("/products", (context) =>
+{
+    var products = app.Services.GetService<JsonFileMagicProductService>().GetMagicProducts();
+    var jsonProducts = JsonSerializer.Serialize<IEnumerable<MagicProduct>>(products);
+    return context.Response.WriteAsync(jsonProducts);
+});*/
 
 app.Run();
