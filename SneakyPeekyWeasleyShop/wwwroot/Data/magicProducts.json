@@ -1,29 +1,30 @@
 [
   {
-    "name": "Marauder's MAP",
+    "name": "Marauder\u0027s MAP",
     "description": "You can see all people all doors and all hallways",
     "img": "https://m.media-amazon.com/images/I/81hXyIewnxL._AC_SY879_.jpg",
-    "url": "https://www.amazon.com/MightyPrint-Potter-Marauders-Generation-Premium/dp/B01LY0V6C2"
+    "url": "https://www.amazon.com/MightyPrint-Potter-Marauders-Generation-Premium/dp/B01LY0V6C2",
+    "Ratings": null
   },
-
   {
     "name": "Ron Wheasley broken wand",
     "description": "Ron sleeps with Peter Pettigrew",
     "img": "https://i.ebayimg.com/images/g/r7AAAOSwtj9hF8P~/s-l500.jpg",
-    "url": "https://www.ebay.com/itm/115472073309"
+    "url": "https://www.ebay.com/itm/115472073309",
+    "Ratings": null
   },
-
   {
     "name": "Dumbledore wand",
     "description": "This wand lets you know all the plot twists and turns",
     "img": "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Picture12_800x.png?v=1610553865",
-    "url": "https://harrypottershop.co.uk/products/professor-dumbledores-wand"
+    "url": "https://harrypottershop.co.uk/products/professor-dumbledores-wand",
+    "Ratings": null
   },
-
   {
     "name": "Harry The Axe wand",
     "description": "200 points to Gryffindor ",
     "img": "https://www.amazon.com/Noble-Collection-NN1910-Illuminating-14-Inch/dp/B000U80O26",
-    "url": "https://m.media-amazon.com/images/I/71XbbIZpzpS._AC_SX679_.jpg"
+    "url": "https://m.media-amazon.com/images/I/71XbbIZpzpS._AC_SX679_.jpg",
+    "Ratings": null
   }
 ]

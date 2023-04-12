@@ -1,4 +1,5 @@
-﻿using SneakyPeekyWeasleyShop.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using SneakyPeekyWeasleyShop.Models;
 using System.Text.Json;
 
 
@@ -27,6 +28,30 @@ namespace SneakyPeekyWeasleyShop.Services
             {
                 return JsonSerializer.Deserialize<MagicProduct[]>(jsonFileReader.ReadToEnd(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             }
+        }
+
+        public void AddRaiting(string productName, int rating)
+        {
+            var magicProducts = GetMagicProducts();
+            var conreteProduct = magicProducts.First(x => x.Name == productName);
+            
+            if(conreteProduct.Ratings is null)
+            {
+                conreteProduct.Ratings = Array.Empty<int>();
+            }
+
+            conreteProduct.Ratings = conreteProduct.Ratings.Append(rating).ToArray();
+
+            using var outputStream = File.OpenWrite(JsonFileName);
+
+            JsonSerializer.Serialize<IEnumerable<MagicProduct>>(
+                new Utf8JsonWriter(outputStream, new JsonWriterOptions
+                {
+                    SkipValidation = true,
+                    Indented = true
+                }),
+                magicProducts
+            );
         }
     }
 }

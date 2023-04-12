@@ -22,5 +22,16 @@ namespace SneakyPeekyWeasleyShop.Controllers
             return _jsonFileMagicProductService.GetMagicProducts();
         }
 
+        [Route("ratings")]
+        [HttpPatch]
+        public ActionResult GetRatings([FromQuery] string productName, [FromQuery] int rating)
+        {
+            if (productName is null)
+                return BadRequest();
+
+            _jsonFileMagicProductService.AddRaiting(productName, rating);
+            return Ok();
+        }
+
     }
 }

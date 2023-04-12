@@ -17,6 +17,8 @@ namespace SneakyPeekyWeasleyShop.Models
         [JsonPropertyName("url")]
         public string? URL { get; set; }
 
+        public int[]? Ratings { get; set; }
+
         public override string ToString() => JsonSerializer.Serialize<MagicProduct>(this);
     }
 }
