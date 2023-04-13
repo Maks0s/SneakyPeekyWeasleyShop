@@ -26,6 +26,7 @@
         </div>
     }
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 @if (selectedMagicProduct != null)
 {
@@ -48,6 +49,26 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    @if (totalVotes == 0)
+                    {
+                        <span>Be the first one to vote!</span>
+                    }
+                    <span>
+                        @totalVotes @voteLable
+                    </span>
+
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        var currentVoteStar = i;
+                        if (i <= currentRaiting)
+                        {
+                            <span class="fa-star fa checked" @onclick="e => SetRaiting(currentVoteStar)"></span>
+                        }
+                        else
+                        {
+                            <span class="fa-star fa" @onclick="e => SetRaiting(currentVoteStar)"></span>
+                        }
+                    }
                 </div>
             </div>
         </div>
@@ -58,11 +79,38 @@
 
 @code {
     MagicProduct selectedMagicProduct;
-    string selectedMagicPriductName;
+    string selectedMagicProductName;
 
     void SelectProduct(string productName)
     {
-        selectedMagicPriductName = productName;
-        selectedMagicProduct = productService.GetMagicProducts().First<MagicProduct>(prod => prod.Name == selectedMagicPriductName);
+        selectedMagicProductName = productName;
+        selectedMagicProduct = productService.GetMagicProducts().First<MagicProduct>(prod => prod.Name == selectedMagicProductName);
+        GetCurrentRaiting();
+    }
+
+    int currentRaiting = 0;
+    int totalVotes = 0;
+    string voteLable;
+
+    void GetCurrentRaiting()
+    {
+        if (selectedMagicProduct.Ratings is null)
+        {
+            currentRaiting = 0;
+            totalVotes = 0;
+            return;
+        }
+
+        totalVotes = selectedMagicProduct.Ratings.Length;
+        voteLable = totalVotes > 1 ? "Votes" : "Vote";
+        int raitingsSum = selectedMagicProduct.Ratings.Sum();
+
+        currentRaiting = raitingsSum / totalVotes;
+    }
+
+    void SetRaiting(int raiting)
+    {
+        productService.AddRaiting(selectedMagicProductName, raiting);
+        SelectProduct(selectedMagicProductName);
     }
 }
