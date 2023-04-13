@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using SneakyPeekyWeasleyShop.Models
+@using SneakyPeekyWeasleyShop.Services
+@using SneakyPeekyWeasleyShop.Controllers
+@inject JsonFileMagicProductService productService
+
+
+<div class="card-columns">
+    @foreach (var magicProduct in productService.GetMagicProducts())
+    {
+        <div class="card">
+            <div class="card-img" style="background-image:url('@magicProduct.Image')"> </div>
+            <div class="card-body">
+                <h5 class="card-title">@magicProduct.Name</h5>
+                <h5 class="card-title">@magicProduct.Description</h5>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <small class="text-muted">
+                <button @onmouseover="(e => SelectProduct(magicProduct.Name))"
+                        data-bs-toggle="modal" data-bs-target="#productModal" class="btn btn-primary">
+                    More Info
+                </button>
+            </small>
+        </div>
+    }
+</div>
+
+@if (selectedMagicProduct != null)
+{
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productTitle">@selectedMagicProduct.Name</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('@selectedMagicProduct.Image');">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@selectedMagicProduct.Description</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@code {
+    MagicProduct selectedMagicProduct;
+    string selectedMagicPriductName;
+
+    void SelectProduct(string productName)
+    {
+        selectedMagicPriductName = productName;
+        selectedMagicProduct = productService.GetMagicProducts().First<MagicProduct>(prod => prod.Name == selectedMagicPriductName);
+    }
+}

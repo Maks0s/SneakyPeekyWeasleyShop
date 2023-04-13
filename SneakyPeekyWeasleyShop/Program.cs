@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 builder.Services.AddTransient<JsonFileMagicProductService>();
 builder.Services.AddControllers();
 
@@ -28,11 +29,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();
-/*app.MapGet("/products", (context) =>
-{
-    var products = app.Services.GetService<JsonFileMagicProductService>().GetMagicProducts();
-    var jsonProducts = JsonSerializer.Serialize<IEnumerable<MagicProduct>>(products);
-    return context.Response.WriteAsync(jsonProducts);
-});*/
+app.MapBlazorHub();
+
 
 app.Run();
