@@ -1,4 +1,5 @@
 ﻿@page
+@using SneakyPeekyWeasleyShop.Components
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -9,16 +10,7 @@
     <p>Here you'll find a lot of funny and of course NOT DANGEROUS things</p>
 </div>
 
-<div class="card-columns">
-    @foreach (var magicProduct in Model.MagicProducts)
-    {
-    <div class="card">
-        <div class="card-img" style="background-image:url('@magicProduct.Image')"> </div>
-        <div class="card-body">
-            <h5 class="card-title">@magicProduct.Name</h5>
-            <h5 class="card-title">@magicProduct.Description</h5>
-        </div>
-    </div>
-    }
-</div>
+@(await Html.RenderComponentAsync<MagicProductList>(RenderMode.ServerPrerendered))
+
+<script src="_framework/blazor.server.js"></script>
 
